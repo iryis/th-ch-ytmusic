@@ -139,12 +139,15 @@ jobs:
           draft: false
           prerelease: false
           replacename: true
-          name: ${{ env.VERSION_TAG }}
+          name: ${{ env.VERSION_TAG }} + Music Widget Plugin
           replacebody: true
           body: |
             See [changelog](https://github.com/th-ch/youtube-music/blob/master/changelog.md#${{ env.CHANGELOG_ANCHOR }}) for the list of updates and the full diff.
 
-            Added `music-query-widget` plugin. This is a fork, use at your own risk.
+            Includes `music-query-widget` plugin. (supports e.g. amuse, ytmdv1)
+
+            # This download may be flagged as potentially dangerous due to not enough people having downloaded it, it is not a virus
+            Regardless, this is a fork, so use at your own risk.
 
             (Note for Windows: `YouTube-Music-Web-Setup-${{ env.VERSION_TAG }}.exe` is an installer, and `YouTube-Music-${{ env.VERSION_TAG }}.exe` is a portable version)
 
