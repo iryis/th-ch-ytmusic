@@ -140,28 +140,17 @@ jobs:
           draft: false
           prerelease: false
           replacename: true
-          name: ${{ env.VERSION_TAG }} + Music Widget Plugin
+          name: ${{ env.VERSION_TAG }}+mw
           replacebody: true
           body: |
             See [changelog](https://github.com/th-ch/youtube-music/blob/master/changelog.md#${{ env.CHANGELOG_ANCHOR }}) for the list of updates and the full diff.
 
             Includes `music-query-widget` plugin. (supports e.g. amuse, ytmdv1)
 
-            # This download may be flagged as potentially dangerous due to not enough people having downloaded it, it is not a virus
-            Regardless, this is a fork, so use at your own risk.
-
             (Note for Windows: `YouTube-Music-Web-Setup-${{ env.VERSION_TAG }}.exe` is an installer, and `YouTube-Music-${{ env.VERSION_TAG }}.exe` is a portable version)
 
-      - name: Update changelog
-        if: ${{ env.VERSION_HASH == '' }}
-        run: |
-          pnpm changelog
-
-      - name: Commit changelog
-        if: ${{ env.VERSION_HASH == '' }}
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: Update changelog for ${{ env.VERSION_TAG }}
-          file_pattern: "changelog.md"
-          commit_user_name: CI
-          commit_user_email: iryis@users.noreply.github.com
+            ## Amuse Tutorial
+            - Download below the release according to your platform (you may have to press Show more releases)
+             - On MacOS You may find it easier to use the other dmg file if you get a "damaged" popup (We love Apple)
+             - Open it up and find Plugins in the top left to enable **Music Widget API**
+             - Continue with regular Amuse OBS setup
