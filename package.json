@@ -5,11 +5,11 @@
   "description": "YouTube Music Desktop App - including custom plugins",
   "main": "./dist/main/index.js",
   "license": "MIT",
-  "repository": "th-ch/youtube-music",
+  "repository": "iryis/th-ch-ytmusic",
   "author": {
-    "name": "th-ch",
-    "email": "th-ch@users.noreply.github.com",
-    "url": "https://github.com/th-ch/youtube-music"
+    "name": "iryis",
+    "email": "68797873+iryis@users.noreply.github.com",
+    "url": "https://github.com/iryis/th-ch-ytmusic"
   },
   "build": {
     "appId": "com.github.th-ch.youtube-music",

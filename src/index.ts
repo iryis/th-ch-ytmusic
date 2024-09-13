@@ -731,7 +731,7 @@ app.whenReady().then(async () => {
     }, 2000);
     autoUpdater.on('update-available', () => {
       const downloadLink =
-        'https://github.com/th-ch/youtube-music/releases/latest';
+        'https://github.com/iryis/th-ch-ytmusic/releases/latest';
       const dialogOptions: Electron.MessageBoxOptions = {
         type: 'info',
         buttons: [
