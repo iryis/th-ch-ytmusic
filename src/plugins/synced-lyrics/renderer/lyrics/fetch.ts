@@ -8,20 +8,16 @@ import { setDebugInfo, setLineLyrics } from '../components/LyricsContainer';
 import type { SongInfo } from '@/providers/song-info';
 import type { LineLyrics, LRCLIBSearchResponse } from '../../types';
 
-// prettier-ignore
 export const [isInstrumental, setIsInstrumental] = createSignal(false);
-// prettier-ignore
 export const [isFetching, setIsFetching] = createSignal(false);
-// prettier-ignore
 export const [hadSecondAttempt, setHadSecondAttempt] = createSignal(false);
-// prettier-ignore
 export const [differentDuration, setDifferentDuration] = createSignal(false);
 
 export const extractTimeAndText = (
   line: string,
   index: number,
 ): LineLyrics | null => {
-  const groups = /\[(\d+):(\d+)\.(\d+)\](.+)/.exec(line);
+  const groups = /\[(\d+):(\d+)\.(\d+)](.+)/.exec(line);
   if (!groups) return null;
 
   const [, rMinutes, rSeconds, rMillis, text] = groups;
@@ -31,14 +27,13 @@ export const extractTimeAndText = (
     parseInt(rMillis),
   ];
 
-  // prettier-ignore
-  const timeInMs = (minutes * 60 * 1000) + (seconds * 1000) + millis;
+  const timeInMs = minutes * 60 * 1000 + seconds * 1000 + millis;
 
   return {
     index,
     timeInMs,
     time: `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}:${millis}`,
-    text: text?.trim() ?? config()!.defaultTextString,
+    text: text?.trim() || config()!.defaultTextString,
     status: 'upcoming',
     duration: 0,
   };
@@ -80,7 +75,6 @@ export const getLyricsList = async (
     track_name: songData.title,
   });
 
-
   if (songData.album) {
     query.set('album_name', songData.album);
   }
@@ -93,7 +87,7 @@ export const getLyricsList = async (
     return null;
   }
 
-  let data = await response.json() as LRCLIBSearchResponse;
+  let data = (await response.json()) as LRCLIBSearchResponse;
   if (!data || !Array.isArray(data)) {
     setDebugInfo('Unexpected server response.');
     return null;
@@ -123,7 +117,7 @@ export const getLyricsList = async (
     setHadSecondAttempt(true);
   }
 
-  const filteredResults = [];
+  const filteredResults: LRCLIBSearchResponse = [];
   for (const item of data) {
     const { artist } = songData;
     const { artistName } = item;
@@ -132,7 +126,10 @@ export const getLyricsList = async (
     const itemArtists = artistName.split(/[&,]/g).map((i) => i.trim());
 
     const permutations = artists.flatMap((artistA) =>
-      itemArtists.map((artistB) => [artistA.toLowerCase(), artistB.toLowerCase()])
+      itemArtists.map((artistB) => [
+        artistA.toLowerCase(),
+        artistB.toLowerCase(),
+      ]),
     );
 
     const ratio = Math.max(...permutations.map(([x, y]) => jaroWinkler(x, y)));
@@ -153,7 +150,7 @@ export const getLyricsList = async (
     return null;
   }
 
-    setDebugInfo(JSON.stringify(closestResult, null, 4));
+  setDebugInfo(JSON.stringify(closestResult, null, 4));
 
   if (Math.abs(closestResult.duration - duration) > 15) {
     return null;
@@ -178,8 +175,8 @@ export const getLyricsList = async (
   // Add a blank line at the beginning
   raw.unshift('[0:0.0] ');
 
-  const syncedLyricList = raw.reduce<LineLyrics[]>((acc, line, index) => {
-    const syncedLine = extractTimeAndText(line, index);
+  const syncedLyricList = raw.reduce<LineLyrics[]>((acc, line) => {
+    const syncedLine = extractTimeAndText(line, acc.length);
     if (syncedLine) {
       acc.push(syncedLine);
     }
