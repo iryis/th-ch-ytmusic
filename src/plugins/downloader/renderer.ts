@@ -8,6 +8,8 @@ import { LoggerPrefix } from '@/utils';
 
 import { t } from '@/i18n';
 
+import { defaultTrustedTypePolicy } from '@/utils/trusted-types';
+
 import { ElementFromHtml } from '../utils/renderer';
 
 import type { RendererContext } from '@/types/contexts';
@@ -107,7 +109,10 @@ export const onRendererLoad = ({
 
   ipc.on('downloader-feedback', (feedback: string) => {
     if (progress) {
-      progress.innerHTML = feedback || t('plugins.downloader.templates.button');
+      const targetHtml = feedback || t('plugins.downloader.templates.button');
+      (progress.innerHTML as string | TrustedHTML) = defaultTrustedTypePolicy
+        ? defaultTrustedTypePolicy.createHTML(targetHtml)
+        : targetHtml;
     } else {
       console.warn(
         LoggerPrefix,

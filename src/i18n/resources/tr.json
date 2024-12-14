@@ -279,6 +279,49 @@
       },
       "name": "Ambiyans Modu"
     },
+    "api-server": {
+      "description": "APİ ekle ve oynatıcıyı kontrol et",
+      "dialog": {
+        "request": {
+          "buttons": {
+            "allow": "İzin ver",
+            "deny": "Reddet"
+          },
+          "message": "{{ID}} ({{origin}}) 'nın APIye erişmesine izin verilsin mi?",
+          "title": "APİ yetkilendirme isteği"
+        }
+      },
+      "menu": {
+        "auth-strategy": {
+          "label": "Yetkilendirme stratejisi",
+          "submenu": {
+            "auth-at-first": {
+              "label": "İlk istekte yetkilendir"
+            },
+            "none": {
+              "label": "Yetkilendirme Yok"
+            }
+          }
+        },
+        "hostname": {
+          "label": "Ana bilgisayar adı"
+        },
+        "port": {
+          "label": "Port"
+        }
+      },
+      "name": "API sunucusu [Beta]",
+      "prompt": {
+        "hostname": {
+          "label": "API sunucusu için hostname (örneğin 0.0.0.0) girin:",
+          "title": "Hostname"
+        },
+        "port": {
+          "label": "API sunucusu için port girin:",
+          "title": "Bağlantı Noktası"
+        }
+      }
+    },
     "audio-compressor": {
       "description": "Ses sıkıştırma (dalganın en gürültülü bölümlerinin ses düzeyini azaltır ve daha yumuşak bölümlerin ses düzeyini artırır)",
       "name": "Ses Sıkıştırma"

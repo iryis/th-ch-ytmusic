@@ -279,6 +279,49 @@
       },
       "name": "Umhverfishamur"
     },
+    "api-server": {
+      "description": "Bætir API netþjóni til að stjórna spilaranum",
+      "dialog": {
+        "request": {
+          "buttons": {
+            "allow": "Leyfa",
+            "deny": "Óleyfa"
+          },
+          "message": "Leyfa {{ID}} ({{origin}}) að aðganga API-ið?",
+          "title": "API heimildarbeiðni"
+        }
+      },
+      "menu": {
+        "auth-strategy": {
+          "label": "Heimildarstefna",
+          "submenu": {
+            "auth-at-first": {
+              "label": "Heimila á fyrst beiðni"
+            },
+            "none": {
+              "label": "Nei heimild"
+            }
+          }
+        },
+        "hostname": {
+          "label": "Hýsitölvunafn"
+        },
+        "port": {
+          "label": "Tengi"
+        }
+      },
+      "name": "API-Netþjónn [Beta]",
+      "prompt": {
+        "hostname": {
+          "label": "Sláðu inn hýsitölvunafnið (eins og 0.0.0.0) fyrir API-netþjónninn:",
+          "title": "Hýsitölvunafn"
+        },
+        "port": {
+          "label": "Sláðu inn tengið fyrir API-netþjónninn:",
+          "title": "Tengi"
+        }
+      }
+    },
     "audio-compressor": {
       "description": "Notaðu þjöppun á hljóð (lækkar hljóðstyrk háværustu hluta merkis og hækkar hljóðstyrk í mýkstu hlutunum)",
       "name": "Hljóðþjöppu"
@@ -670,7 +713,56 @@
     },
     "synced-lyrics": {
       "description": "Veitir samstillta texta við lög, með því að nota veitur eins og LRClib.",
-      "name": "Samstilltur texti"
+      "errors": {
+        "fetch": "⚠️ - Villa kom upp við að sækja textann. Vinsamlegast reyndu aftur síðar.",
+        "not-found": "⚠️ - Enginn texti fannst við þetta lag."
+      },
+      "menu": {
+        "default-text-string": {
+          "label": "Sjálfgefið tákn á milli texta",
+          "tooltip": "Veldu sjálfgefna tákn til að nota fyrir bilið á milli texta"
+        },
+        "line-effect": {
+          "label": "Línuafleiðing",
+          "submenu": {
+            "focus": {
+              "label": "Brennidepill",
+              "tooltip": "Gerðu aðeins núverandi línu hvíta"
+            },
+            "offset": {
+              "label": "Fararbyrjun",
+              "tooltip": "Fararbyrjun á hægri af núverandi línan"
+            },
+            "scale": {
+              "label": "Skali",
+              "tooltip": "Skala núverandi línu"
+            }
+          },
+          "tooltip": "Veldu áhrif til að nota á núverandi línu"
+        },
+        "precise-timing": {
+          "label": "Gera textana fullkomlega samstillta",
+          "tooltip": "Reikna upp á millisekúndu birtingu næstu línu (getur haft lítil áhrif á frammistöðu)"
+        },
+        "show-lyrics-even-if-inexact": {
+          "label": "Sýna texta, jafnvel þótt hann sé ónákvæmur",
+          "tooltip": "Ef lagið finnst ekki reynir tengiforritið aftur með annarri leitarfyrirspurn.\nNiðurstaðan úr annarri tilraun er kannski ekki nákvæm."
+        },
+        "show-time-codes": {
+          "label": "Sýna tímikóðar",
+          "tooltip": "Sýna tímakóðana við hliðina á textanum"
+        }
+      },
+      "name": "Samstilltur texti",
+      "refetch-btn": {
+        "fetching": "Er að sækja",
+        "normal": "Endursækja texta"
+      },
+      "warnings": {
+        "duration-mismatch": "⚠️ - Textarnir gætu verið ekki samstilltir vegna tímalengdar.",
+        "inexact": "⚠️ - Textinn við þetta lag er kannski ekki nákvæmur",
+        "instrumental": "⚠️ - Þetta er hljóðfærilegt lag"
+      }
     },
     "taskbar-mediacontrol": {
       "description": "Stjórnaðu spilun frá Windows verkefnastikunni þinni",
